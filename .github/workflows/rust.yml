@@ -35,16 +35,12 @@ jobs:
           exec $FILE
           rm -rf ./target
         fi
-        echo "INSERT_FILES=${{ steps.abc.outputs.added_modified }}"
         
-        echo $INSERT_FILES
-        echo "HELLO"
-
-        for i in $(grep "pages" <(echo $INSERT_FILES)); do
+        for i in $(grep "pages" <(echo ${{ steps.abc.outputs.added_modified }})); do
            a=$(basename $i '.md')
            curl "https://gymskilltree.com/insert_page?n=$a"
         done
-        for i in $(grep "packages" <(echo $INSERT_FILES)); do
+        for i in $(grep "packages" <(echo ${{ steps.abc.outputs.added_modified }})); do
            a=$(basename $i '.svg')
            b=$(basename $(dirname $i))
            curl "https://gymskilltree.com/insert_package?p=$a&n=$b"
