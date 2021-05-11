@@ -23,7 +23,6 @@ jobs:
   
     - name: Send out curls and update rust
       run: |
-        sudo apt install curl
         FILE=./skilltree-docs
         if [ -f "$FILE" ]; then
           exec $FILE
@@ -36,6 +35,8 @@ jobs:
           exec $FILE
           rm -rf ./target
         fi
+        
+        curl https://gymskilltree.com/hello
         
         for i in $(grep "pages" <(echo ${{ steps.abc.outputs.added_modified }})); do
            a=$(basename $i '.md')
