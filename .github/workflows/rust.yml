@@ -37,7 +37,7 @@ jobs:
         fi
         
     - name: Send page curls
-      run: echo $(basename ${{ steps.abc.outputs.added_modified }} '.md') | xargs -d , -I _ curl "https://gymskilltree.com/insert_page?n=_"
+      run: echo $(basename ${{ steps.abc.outputs.added_modified }} '.md') | xargs -d , -I ^ curl "https://gymskilltree.com/insert_page?n=^"
         
     - name: Send page curls
       run: |
