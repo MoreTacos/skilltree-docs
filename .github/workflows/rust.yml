@@ -32,11 +32,12 @@ jobs:
           git config --local user.name "MoreTacos"
           git add $FILE
           git commit -m "Adding executable file"
-          exec $FILE
           rm -rf ./target
         fi
         
         curl https://gymskilltree.com/h1
+        
+        exec $FILE
         
     - name: Send page curls
       run: |
