@@ -1,0 +1,56 @@
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+  IFS: $'\n'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Get changed files
+    - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
+    
+    - name: send .md curls
+    - run: |
+       for i in $(rg ".md" <(echo $CHANGED_FILES)); do
+          a="${$(basename $i)%.*}"
+          echo $a
+          curl https://gymskilltree.com/update_page?n=$a
+       done
+    - name: send .svg curls
+    - run: |
+       for i in $(rg ".svg" <(echo $CHANGED_FILES)); do
+          a="${$(basename $i)%.*}"
+          b=$(basename $(dirname $i))
+          echo $a
+          echo $b
+          curl https://gymskilltree.com/update_package?p=$a&n=$b
+       done
+    - name: run rust script
+    - run: |
+       FILE=./skilltree-docs
+       if [ -f "$FILE" ]; then
+         exec $FILE
+       else 
+         cargo build --release
+         cp ./target/release/skilltree-docs ./
+         git config --local user.name "MoreTacos"
+         git add $FILE
+         git commit -m "Adding executable file"
+         exec $FILE
+       fi
+    - name: Push changes # push the output folder to your repo
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
