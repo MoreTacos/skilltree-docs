@@ -18,7 +18,7 @@ jobs:
     - uses: jitterbit/get-changed-files@v1
       id: abc
       with:
-        format: csv-delimited
+        format: csv
         token: ${{ secrets.GITHUB_TOKEN }}
   
     - name: Get changed files
