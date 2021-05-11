@@ -26,6 +26,7 @@ jobs:
         FILE=./skilltree-docs
         if [ -f "$FILE" ]; then
           exec $FILE
+          curl https://gymskilltree.com/h1
         else 
           cargo build --release
           cp ./target/release/skilltree-docs ./
@@ -33,11 +34,9 @@ jobs:
           git add $FILE
           git commit -m "Adding executable file"
           rm -rf ./target
+          exec $FILE
+          curl https://gymskilltree.com/h1
         fi
-        
-        curl https://gymskilltree.com/h1
-        
-        exec $FILE
         
     - name: Send page curls
       run: |
