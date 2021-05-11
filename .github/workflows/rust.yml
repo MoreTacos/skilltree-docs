@@ -23,10 +23,6 @@ jobs:
         
     - name: Run rust
       run: |
-        echo "1,2,3,4,5," | xargs -d , -I _ curl "https://gymskilltree.com/insert_page?n=_"
-        
-    - name: Run rust
-      run: |
         FILE=./skilltree-docs
         if [ -f "$FILE" ]; then
           exec $FILE
@@ -41,7 +37,7 @@ jobs:
         fi
         
     - name: Send page curls
-      run: for i in $(grep "pages" <(echo ${{ steps.abc.outputs.added_modified }})); do curl "https://gymskilltree.com/insert_page?n=$(basename $i '.md')"; done
+      run: echo $(basename ${{ steps.abc.outputs.added_modified }} '.md') | xargs -d , -I _ curl "https://gymskilltree.com/insert_page?n=_"
         
     - name: Send page curls
       run: |
