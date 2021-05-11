@@ -6,7 +6,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  IFS: $'\n'
+  IFS: $','
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
     - uses: jitterbit/get-changed-files@v1
       id: abc
       with:
-        format: newline-delimited
+        format: csv-delimited
         token: ${{ secrets.GITHUB_TOKEN }}
   
     - name: Get changed files
