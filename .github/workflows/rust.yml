@@ -37,18 +37,12 @@ jobs:
         fi
         
     - name: Send page curls
-      run: |
-        for i in $(grep "pages" <(echo ${{ steps.abc.outputs.added_modified }})); do
-           a=$(basename $i '.md')
-           curl "https://gymskilltree.com/insert_page?n=$a"
-        done
+      run: for i in $(grep "pages" <(echo ${{ steps.abc.outputs.added_modified }})); do curl "https://gymskilltree.com/insert_page?n=$(basename $i '.md')"; done
         
     - name: Send page curls
       run: |
         for i in $(grep "packages" <(echo ${{ steps.abc.outputs.added_modified }})); do
-           a=$(basename $i '.svg')
-           b=$(basename $(dirname $i))
-           curl "https://gymskilltree.com/insert_package?p=$a&n=$b"
+           curl "https://gymskilltree.com/insert_package?p=$(basename $i '.svg')&n=$(basename $(dirname $i))";
         done
    
     - name: Push changes # push the output folder to your repo
