@@ -23,9 +23,7 @@ jobs:
   
     - name: Get changed files
       run: |
-        echo "CHANGED_FILES=${{ steps.abc.outputs.modified }}"
-        echo "NEW_FILES=${{ steps.abc.outputs.added }}"
-        echo "INSERT_FILES=$(sort -u <(echo $CHANGED_FILES) <(echo $NEW_FILES))"
+        echo "INSERT_FILES=${{ steps.abc.outputs.added_or_modified }}"
     
     - name: send .md curls
       run: |
