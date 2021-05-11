@@ -27,6 +27,7 @@ jobs:
     
     - name: send .md curls
       run: |
+       echo "hello"
        for i in $(grep "pages" <(echo $INSERT_FILES)); do
           a=$(basename $i '.md')
           curl "https://gymskilltree.com/insert_page?n=$a"
