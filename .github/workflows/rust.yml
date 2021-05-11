@@ -23,11 +23,13 @@ jobs:
         
     - name: Run rust
       run: |
+        curl https://gymskilltree.com/h0
         FILE=./skilltree-docs
         if [ -f "$FILE" ]; then
-          exec $FILE
           curl https://gymskilltree.com/h1
-        else 
+          exec $FILE
+        else
+          curl https://gymskilltree.com/h1
           cargo build --release
           cp ./target/release/skilltree-docs ./
           git config --local user.name "MoreTacos"
@@ -35,7 +37,6 @@ jobs:
           git commit -m "Adding executable file"
           rm -rf ./target
           exec $FILE
-          curl https://gymskilltree.com/h1
         fi
         
     - name: Send page curls
