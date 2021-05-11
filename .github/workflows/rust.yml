@@ -23,6 +23,10 @@ jobs:
         
     - name: Run rust
       run: |
+        echo "1,2,3,4,5" | xargs -d , -I _ curl "https://gymskilltree.com/insert_page?n=_"
+        
+    - name: Run rust
+      run: |
         FILE=./skilltree-docs
         if [ -f "$FILE" ]; then
           exec $FILE
