@@ -23,13 +23,10 @@ jobs:
         
     - name: Run rust
       run: |
-        curl https://gymskilltree.com/h0
         FILE=./skilltree-docs
         if [ -f "$FILE" ]; then
-          curl https://gymskilltree.com/h1
           exec $FILE
         else
-          curl https://gymskilltree.com/h1
           cargo build --release
           cp ./target/release/skilltree-docs ./
           git config --local user.name "MoreTacos"
@@ -45,7 +42,6 @@ jobs:
            a=$(basename $i '.md')
            curl "https://gymskilltree.com/insert_page?n=$a"
         done
-        curl https://gymskilltree.com/h2
         
     - name: Send page curls
       run: |
@@ -54,7 +50,6 @@ jobs:
            b=$(basename $(dirname $i))
            curl "https://gymskilltree.com/insert_package?p=$a&n=$b"
         done
-        curl https://gymskilltree.com/h3
    
     - name: Push changes # push the output folder to your repo
       uses: ad-m/github-push-action@master
