@@ -24,14 +24,14 @@ jobs:
     - name: send .md curls
       run: |
        for i in $(grep "pages" <(echo $CHANGED_FILES)); do
-          a="${$(basename $i)%.*}"
+          a=$(basename $i '.md')
           curl https://gymskilltree.com/update_page?n=$a
        done
    
     - name: send .svg curls
       run: |
        for i in $(grep "packages" <(echo $CHANGED_FILES)); do
-          a="${$(basename $i)%.*}"
+          a=$(basename $i '.svg')
           b=$(basename $(dirname $i))
           curl https://gymskilltree.com/update_package?p=$a&n=$b
        done
