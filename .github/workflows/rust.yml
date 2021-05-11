@@ -15,25 +15,31 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: jitterbit/get-changed-files@v1
+      id: abc
       with:
-        fetch-depth: 0
+        format: newline-delimited
+        token: ${{ secrets.GITHUB_TOKEN }}
   
     - name: Get changed files
-      run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
+      run: |
+        echo "CHANGED_FILES=${{ steps.abc.outputs.modified }}"
+        echo "NEW_FILES=${{ steps.abc.outputs.added }}"
+        echo "INSERT_FILES=$(sort -u <(echo $CHANGED_FILES) <(echo $NEW_FILES))"
     
     - name: send .md curls
       run: |
-       for i in $(grep "pages" <(echo $CHANGED_FILES)); do
+       for i in $(grep "pages" <(echo $INSERT_FILES)); do
           a=$(basename $i '.md')
-          curl https://gymskilltree.com/update_page?n=$a
+          curl https://gymskilltree.com/insert_page?n=$a
        done
    
     - name: send .svg curls
       run: |
-       for i in $(grep "packages" <(echo $CHANGED_FILES)); do
+       for i in $(grep "packages" <(echo $INSERT_FILES)); do
           a=$(basename $i '.svg')
           b=$(basename $(dirname $i))
-          curl https://gymskilltree.com/update_package?p=$a&n=$b
+          curl https://gymskilltree.com/insert_package?p=$a&n=$b
        done
    
     - name: run rust script
