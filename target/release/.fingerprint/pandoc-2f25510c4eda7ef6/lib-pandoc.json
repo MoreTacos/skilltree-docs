@@ -1,1 +1,0 @@
-{"rustc":980339446442776632,"features":"[]","target":16119159440251003853,"profile":2285152228202085614,"path":10756976175415923306,"deps":[[4465353357659820806,"itertools",false,7602533222909869930]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/pandoc-2f25510c4eda7ef6/dep-lib-pandoc"}}],"rustflags":[],"metadata":3517333821865551098,"config":0}
