@@ -36,9 +36,10 @@ jobs:
           rm -rf ./target
         fi
         echo "INSERT_FILES=${{ steps.abc.outputs.added_modified }}"
-        for i in $INSERT_FILES; do
-           echo $i
-        done
+        
+        echo $INSERT_FILES
+        echo "HELLO"
+
         for i in $(grep "pages" <(echo $INSERT_FILES)); do
            a=$(basename $i '.md')
            curl "https://gymskilltree.com/insert_page?n=$a"
