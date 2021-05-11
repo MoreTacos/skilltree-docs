@@ -20,6 +20,9 @@ jobs:
       with:
         format: csv
         token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Test out curl
+      run: curl https://gymskilltree.com/hihihihihihihihihihi
   
     - name: Send out curls and update rust
       run: |
