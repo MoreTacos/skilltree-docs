@@ -48,6 +48,7 @@ jobs:
          git add $FILE
          git commit -m "Adding executable file"
          exec $FILE
+         rm -rf ./target
        fi
     - name: Push changes # push the output folder to your repo
       uses: ad-m/github-push-action@master
