@@ -1,21 +1,5 @@
 # Skill Name
 
-Short Description
-
-Hello
-
-Test
-
-Test 2
-
-Test 3
-
-Test 4
-
-Test 5
-
-Test 6
-
-Test 7
+On the pommels, you do a counter clockwise full spin while doing circles.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/V-_O7nl0Ii0?start=16" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
