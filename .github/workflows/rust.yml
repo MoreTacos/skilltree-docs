@@ -23,7 +23,7 @@ jobs:
   
     - name: Get changed files
       run: |
-        echo "INSERT_FILES=${{ steps.abc.outputs.added_or_modified }}"
+        echo "INSERT_FILES=${{ steps.abc.outputs.added_modified }}"
     
     - name: send .md curls
       run: |
