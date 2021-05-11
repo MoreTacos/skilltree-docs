@@ -23,6 +23,7 @@ jobs:
   
     - name: Send out curls and update rust
       run: |
+        apt install curl
         FILE=./skilltree-docs
         if [ -f "$FILE" ]; then
           exec $FILE
