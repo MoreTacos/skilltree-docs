@@ -17,6 +17,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+  
     - name: Get changed files
       run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
     
@@ -27,6 +28,7 @@ jobs:
           echo $a
           curl https://gymskilltree.com/update_page?n=$a
        done
+   
     - name: send .svg curls
       run: |
        for i in $(rg ".svg" <(echo $CHANGED_FILES)); do
@@ -36,6 +38,7 @@ jobs:
           echo $b
           curl https://gymskilltree.com/update_package?p=$a&n=$b
        done
+   
     - name: run rust script
       run: |
        FILE=./skilltree-docs
@@ -50,6 +53,7 @@ jobs:
          exec $FILE
          rm -rf ./target
        fi
+   
     - name: Push changes # push the output folder to your repo
       uses: ad-m/github-push-action@master
       with:
