@@ -29,11 +29,11 @@ jobs:
           cp ./target/release/createfiles ./
           git config --local user.name "MoreTacos"
           git add $FILE
-          git add ./pages/*
-          git commit -m "Add createfiles"
           rm -rf ./target
         fi
         $FILE
+        git add ./pages/*
+        git commit -m "Add createfiles and pages"
         
     - name: Send curl
       run: |
