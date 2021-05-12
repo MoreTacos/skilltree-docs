@@ -62,6 +62,7 @@ fn main() {
             fs::write(&path, &default).unwrap();
 
             let mut pandoc = pandoc::new();
+            pandoc.add_input(&default);
             pandoc.set_output(OutputKind::File("/tmp/skilltree.html".into()));
             pandoc.execute().unwrap();
             let content = r###"{% extends "docs" %}
