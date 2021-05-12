@@ -23,11 +23,11 @@ jobs:
     - name: Create files
       run: |
         sudo apt install pandoc
+        git config --local user.name "MoreTacos"
         FILE=./createfiles
         if [ ! -f "$FILE" ]; then
           cargo build --release
           cp ./target/release/createfiles ./
-          git config --local user.name "MoreTacos"
           git add $FILE
           rm -rf ./target
         fi
@@ -37,12 +37,11 @@ jobs:
         
     - name: Send curl
       run: |
-        sudo apt install pandoc
+        git config --local user.name "MoreTacos"
         FILE=./sendcurl
         if [ ! -f "$FILE" ]; then
           cargo build --release
           cp ./target/release/sendcurl ./
-          git config --local user.name "MoreTacos"
           git add $FILE
           git commit -m "Add sendcurl"
           rm -rf ./target
