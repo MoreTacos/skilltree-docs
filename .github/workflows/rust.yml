@@ -6,7 +6,6 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  IFS: $','
 
 jobs:
   build:
@@ -21,29 +20,34 @@ jobs:
         format: csv
         token: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: Run rust
+    - name: Create files
       run: |
-        FILE=./skilltree-docs
-        if [ -f "$FILE" ]; then
-          exec $FILE
-        else
+        sudo apt install pandoc
+        FILE=./createfiles
+        if [ ! -f "$FILE" ]; then
           cargo build --release
-          cp ./target/release/skilltree-docs ./
+          cp ./target/release/createfiles ./
           git config --local user.name "MoreTacos"
           git add $FILE
-          git commit -m "Adding executable file"
           rm -rf ./target
-          exec $FILE
         fi
+        $FILE
+        git add ./pages/*
+        git commit -m "Add createfiles and pages"
         
-    - name: Send page curls
-      run: echo ${{ steps.abc.outputs.added_modified }} | xargs -d , -I _ bash -c 'curl https://gymskilltree.com/insertpage?n=$(cut -f1 -d . <(basename _))'
-        
-    - name: Send page curls
+    - name: Send curl
       run: |
-        for i in $(grep "packages" <(echo ${{ steps.abc.outputs.added_modified }})); do
-           curl "https://gymskilltree.com/insert_package?p=$(basename $i '.svg')&n=$(basename $(dirname $i))";
-        done
+        sudo apt install pandoc
+        FILE=./sendcurl
+        if [ ! -f "$FILE" ]; then
+          cargo build --release
+          cp ./target/release/sendcurl ./
+          git config --local user.name "MoreTacos"
+          git add $FILE
+          git commit -m "Add sendcurl"
+          rm -rf ./target
+        fi
+        $FILE ${{ steps.abc.outputs.added_modified }}
    
     - name: Push changes # push the output folder to your repo
       uses: ad-m/github-push-action@master
