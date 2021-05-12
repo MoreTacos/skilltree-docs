@@ -47,7 +47,7 @@ jobs:
           rm -rf ./target
         fi
         $FILE
-        git add ./pages/*
+        git add .
         git commit --allow-empty -m "Add pages"
    
     - name: Push changes # push the output folder to your repo
