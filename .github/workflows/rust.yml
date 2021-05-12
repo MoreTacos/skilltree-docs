@@ -26,11 +26,11 @@ jobs:
         FILE=./createfiles
         if [ ! -f "$FILE" ]; then
           cargo build --release
-          cp ./target/release/createfile ./
+          cp ./target/release/createfiles ./
           git config --local user.name "MoreTacos"
           git add $FILE
           git add ./pages/*
-          git commit -m "Add createfile"
+          git commit -m "Add createfiles"
           rm -rf ./target
         fi
         $FILE
