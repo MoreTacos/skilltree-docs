@@ -15,6 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: jitterbit/get-changed-files@v1
+    - uses: docker://pandoc/core:2.9
       id: abc
       with:
         format: csv
@@ -22,7 +23,6 @@ jobs:
         
     - name: Send curl
       run: |
-        sudo apt install pandoc
         git config --local user.name "MoreTacos"
         FILE=./sendcurl
         if [ ! -f "$FILE" ]; then
