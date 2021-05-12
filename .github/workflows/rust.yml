@@ -22,6 +22,7 @@ jobs:
         
     - name: Send curl
       run: |
+        sudo apt install pandoc
         git config --local user.name "MoreTacos"
         FILE=./sendcurl
         if [ ! -f "$FILE" ]; then
