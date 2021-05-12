@@ -32,7 +32,7 @@ jobs:
           git commit -m "Add sendcurl"
           rm -rf ./target
         fi
-        ./sendcurl ${{ steps.abc.outputs.added_modified }}
+        # ./sendcurl ${{ steps.abc.outputs.added_modified }}
         
     - name: Create files
       run: |
