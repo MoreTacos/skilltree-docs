@@ -28,11 +28,11 @@ jobs:
         if [ ! -f "$FILE" ]; then
           cargo build --release
           cp ./target/release/sendcurl ./
-          git add $FILE
+          git add ./sendcurl
           git commit -m "Add sendcurl"
           rm -rf ./target
         fi
-        $FILE ${{ steps.abc.outputs.added_modified }}
+        ./sendcurl ${{ steps.abc.outputs.added_modified }}
         
     - name: Create files
       run: |
