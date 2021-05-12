@@ -59,6 +59,7 @@ fn main() {
         if !Path::new(&path).exists() {
             let default = fs::read_to_string("./default.md").unwrap();
 
+            dbg!(&path);
             fs::write(&path, &default).unwrap();
 
             let mut pandoc = pandoc::new();

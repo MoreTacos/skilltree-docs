@@ -63,7 +63,6 @@ fn main() {
 }
 
 fn tabparse(path: String) -> String {
-    dbg!(&path);
     let mut svg = fs::read_to_string(&path).unwrap();
 
     // Remove all <span> tags
