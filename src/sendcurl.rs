@@ -14,11 +14,13 @@ fn main() {
         .iter()
         .cloned()
         .filter(|x| x.contains("pages/"))
+        .filter(|x| x.contains(".md"))
         .collect::<Vec<String>>();
     let svg_files = added_modified
         .iter()
         .cloned()
         .filter(|x| x.contains("packages/"))
+        .filter(|x| x.contains(".svg"))
         .collect::<Vec<String>>();
 
     let client = reqwest::blocking::Client::new();
@@ -46,6 +48,7 @@ fn main() {
             .to_str()
             .unwrap()
             .to_string();
+        assert_ne!(p, "packages".to_string());
         let n = Path::new(&x)
             .file_stem()
             .unwrap()

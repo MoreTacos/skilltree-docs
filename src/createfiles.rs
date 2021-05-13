@@ -4,7 +4,7 @@ use std::path::Path;
 
 fn main() {
     let mut skills: Vec<String> = vec![];
-    for path in glob("./packages/**/*.svg").expect("Failed at glob") {
+    for path in glob("./packages/*/*.svg").expect("Failed at glob") {
         let mut svg = fs::read_to_string(path.unwrap()).unwrap();
 
         // Remove all <span> tags
