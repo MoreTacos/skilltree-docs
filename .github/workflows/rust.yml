@@ -15,7 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: jitterbit/get-changed-files@v1
-    - uses: docker://pandoc/core:2.9
       id: abc
       with:
         format: csv
