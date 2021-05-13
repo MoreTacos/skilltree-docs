@@ -1,5 +1,4 @@
 use glob::glob;
-use pandoc::OutputKind;
 use std::fs;
 use std::path::Path;
 
@@ -56,21 +55,22 @@ fn main() {
 
     for skill in skills {
         let path = format!("./pages/{}.md", &skill);
+
         if !Path::new(&path).exists() {
             let default = fs::read_to_string("./default.md").unwrap();
 
             fs::create_dir_all("./pages").unwrap();
             fs::write(&path, &default).unwrap();
 
-            let mut pandoc = pandoc::new();
-            pandoc.add_input(&path);
-            pandoc.set_output(OutputKind::File("/tmp/skilltree.html".into()));
-            pandoc.execute().unwrap();
+            let mut options = comrak::ComrakOptions::default();
+            options.render.unsafe_ = true;
+            let html = comrak::markdown_to_html(&default, &options);
+
             let content = r###"{% extends "docs" %}
 
 {% block body %}"###
                 .to_string()
-                + &fs::read_to_string("/tmp/skilltree.html").unwrap()
+                + &html
                 + r###"<div class="issue"><a href="https://github.com/MoreTacos/skilltree-docs/tree/master/pages/{{ skill }}.md">Add something to the page?</a></div>"###
                 + r###"
 {% endblock %}"###;

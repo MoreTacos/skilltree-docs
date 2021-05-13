@@ -1,4 +1,3 @@
-use pandoc::OutputKind;
 use std::env;
 use std::fs;
 use std::path::Path;
@@ -25,13 +24,16 @@ fn main() {
     let client = reqwest::blocking::Client::new();
     md_files.into_iter().for_each(|x| {
         let n = Path::new(&x).file_stem().unwrap().to_str().unwrap().to_string();
-        let mut pandoc = pandoc::new();
-        pandoc.add_input(&x);
-        pandoc.set_output(OutputKind::File("/tmp/skilltree.html".into()));
-        pandoc.execute().unwrap();
+
+        let raw = fs::read_to_string(&x).unwrap();
+
+        let mut options = comrak::ComrakOptions::default();
+        options.render.unsafe_ = true;
+        let html = comrak::markdown_to_html(&raw, &options);
+
         let content = r###"{% extends "docs" %}
 
-{% block body %}"###.to_string() + &fs::read_to_string("/tmp/skilltree.html").unwrap() + r###"<div class="issue"><a href="https://github.com/MoreTacos/skilltree-docs/tree/master/pages/{{ skill }}.md">Add something to the page?</a></div>"### + r###"
+{% block body %}"###.to_string() + &html + r###"<div class="issue"><a href="https://github.com/MoreTacos/skilltree-docs/tree/master/pages/{{ skill }}.md">Add something to the page?</a></div>"### + r###"
 {% endblock %}"###;
         let _res = client.post(format!("https://gymskilltree.com/insert_page?n={}", n)).body(content).send().expect("bad request");
     });
