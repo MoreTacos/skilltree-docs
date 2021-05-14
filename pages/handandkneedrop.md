@@ -2,4 +2,4 @@
 
 Short Description
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/V-_O7nl0Ii0?start=16" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/Fk2TQ91" data-context="false" ><a href="//imgur.com/a/Fk2TQ91"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
