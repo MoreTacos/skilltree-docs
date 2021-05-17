@@ -1,5 +1,5 @@
-# Skill Name
+# Basic Bouncing
 
-Short Description
+On the trampoline, being able to bounce with a tight body and arms up in the air beside your ears.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/V-_O7nl0Ii0?start=16" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+For full score, you should not be buckling under the pressure and stay straight + keep arms glued to beside your head.
